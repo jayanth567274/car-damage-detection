@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoDetect AI - Car Damage Detection & Cost Estimation</title>
+    
+    <!-- Fonts: IBM Plex Sans for tech feel, Outfit for headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="damage-styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">🚗</span>
+                <h1>AutoDetect AI</h1>
+            </div>
+            <p class="tagline">AI-Powered Car Damage Detection</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <div class="container">
+            
+            <!-- Upload Section -->
+            <section class="upload-section" id="uploadSection">
+                <div class="upload-card">
+                    <div class="upload-icon">📸</div>
+                    <h2>Upload Car Image</h2>
+                    <p class="upload-description">Upload a photo of your vehicle to detect damage and get instant cost estimates</p>
+                    
+                    <!-- File Upload Area -->
+                    <div class="upload-area" id="uploadArea">
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                        <div class="upload-content">
+                            <svg class="upload-svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            <p class="upload-text">Click to upload or drag and drop</p>
+                            <p class="upload-hint">PNG, JPG, WEBP up to 10MB</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Preview Section -->
+                    <div class="preview-section" id="previewSection" style="display: none;">
+                        <div class="image-preview">
+                            <img id="previewImage" src="" alt="Uploaded car image">
+                            <button class="remove-image" id="removeImage">✕</button>
+                        </div>
+                        <button class="btn btn-primary btn-large" id="analyzeBtn">
+                            <span class="btn-icon">🔍</span>
+                            Analyze Damage
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Info Cards -->
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon">⚡</div>
+                        <h3>Instant Analysis</h3>
+                        <p>Get results in seconds with AI-powered detection</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🎯</div>
+                        <h3>Accurate Detection</h3>
+                        <p>Identifies scratches, dents, cracks, and more</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">💰</div>
+                        <h3>Cost Estimation</h3>
+                        <p>Get approximate repair costs instantly</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading State -->
+            <section class="loading-section" id="loadingSection" style="display: none;">
+                <div class="loading-card">
+                    <div class="loading-spinner"></div>
+                    <h2>Analyzing Your Vehicle...</h2>
+                    <p class="loading-text" id="loadingText">AI is examining the image for damage</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-header">
+                    <h2>Analysis Complete</h2>
+                    <button class="btn btn-secondary" id="newAnalysisBtn">
+                        <span class="btn-icon">📸</span>
+                        Analyze Another Image
+                    </button>
+                </div>
+
+                <div class="results-grid">
+                    <!-- Analyzed Image -->
+                    <div class="result-card analyzed-image-card">
+                        <h3>Analyzed Image</h3>
+                        <div class="analyzed-image">
+                            <img id="analyzedImage" src="" alt="Analyzed car">
+                        </div>
+                    </div>
+
+                    <!-- Damage Summary -->
+                    <div class="result-card summary-card">
+                        <h3>Damage Summary</h3>
+                        <div class="summary-content" id="summaryContent">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Analysis -->
+                <div class="detailed-analysis">
+                    <h3>Detailed Damage Report</h3>
+                    <div class="damage-list" id="damageList">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Cost Breakdown -->
+                <div class="cost-breakdown">
+                    <h3>Cost Breakdown</h3>
+                    <div class="cost-table" id="costTable">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                    <div class="total-cost">
+                        <span>Estimated Total Repair Cost:</span>
+                        <span class="total-amount" id="totalCost">$0</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="downloadReportBtn">
+                        <span class="btn-icon">📥</span>
+                        Download Report
+                    </button>
+                    <button class="btn btn-outline" id="shareReportBtn">
+                        <span class="btn-icon">🔗</span>
+                        Share Report
+                    </button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 AutoDetect AI. Powered by Claude AI Vision.</p>
+            <p class="disclaimer">Note: Estimates are approximate. Consult a professional for accurate quotes.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="damage-script.js"></script>
+</body>
+</html>
