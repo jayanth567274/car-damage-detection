@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Damage Detection System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <div>
+                    <h1>🚗 Car Damage Detection System</h1>
+                    <p>Upload a car image to detect damage and estimate repair costs</p>
+                </div>
+                <div class="user-info" id="userInfo">
+                    <!-- User info will be populated here -->
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="card">
+                    <h2>Upload Car Image</h2>
+                    <form id="uploadForm" enctype="multipart/form-data">
+                        <div class="file-input-container">
+                            <input type="file" 
+                                   id="carImage" 
+                                   name="carImage" 
+                                   accept="image/*" 
+                                   required>
+                            <label for="carImage" class="file-label">
+                                <span class="file-icon">📁</span>
+                                <span class="file-text">Choose Car Image (JPG/PNG)</span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" id="uploadBtn" class="upload-btn">
+                            <span class="btn-text">🔍 Detect Damage</span>
+                        </button>
+                    </form>
+                    
+                    <!-- Image Preview -->
+                    <div id="imagePreview" class="image-preview hidden">
+                        <h3>Image Preview:</h3>
+                        <img id="previewImg" src="" alt="Car image preview">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Analyzing car damage...</p>
+            </div>
+
+            <!-- Results Section -->
+            <section id="resultsSection" class="results-section hidden">
+                <div class="card">
+                    <h2>📊 Damage Analysis Results</h2>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <h3>🔧 Damaged Part</h3>
+                            <p id="damagedPart" class="result-value">-</p>
+                        </div>
+                        
+                        <div class="result-item">
+                            <h3>💰 Estimated Cost</h3>
+                            <p id="estimatedCost" class="result-value cost">-</p>
+                        </div>
+                        
+                        <div class="result-item">
+                            <h3>⚠️ Damage Severity</h3>
+                            <p id="severity" class="result-value severity">-</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Detailed Damage Information -->
+                    <div class="detailed-info">
+                        <h3>📍 Location & Description</h3>
+                        <p id="damageDescription" class="info-text">-</p>
+                        <p id="damageLocation" class="info-text">-</p>
+                    </div>
+                    
+                    <div class="message-box">
+                        <p id="resultMessage"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History Section -->
+            <section id="historySection" class="history-section hidden">
+                <div class="card">
+                    <div class="section-header">
+                        <h2>📋 Your Detection History</h2>
+                        <button id="refreshHistory" class="refresh-btn">🔄 Refresh</button>
+                    </div>
+                    <div id="historyList" class="history-list">
+                        <!-- History items will be populated here -->
+                    </div>
+                    <div id="noHistory" class="no-history hidden">
+                        <p>No detection history yet. Upload your first car image!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Car Damage Detection System</p>
+        </footer>
+    </div>
+
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="script-firebase.js"></script>
+</body>
+</html>
